@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TP Symfony{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">TP Symfony</h1>
+    <a href="{{ path('app_home') }}" class="btn btn-secondary mb-3">Retour à l'accueil</a>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Utilisateurs</h2>
+            <ul class="list-group">
+            {% for user in users %}
+                <li class="list-group-item">{{ user.username }} - {{ user.email }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Notes</h2>
+            <ul class="list-group">
+            {% for note in notes %}
+                <li class="list-group-item">{{ note.title }} par {{ note.creator.username }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Catégories</h2>
+            <ul class="list-group">
+            {% for category in categories %}
+                <li class="list-group-item">{{ category.title }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

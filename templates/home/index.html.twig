@@ -1,7 +1,11 @@
-<h1>Hello, {{ name }}!</h1>
+{% extends 'base.html.twig' %}
 
-<ul>
-{% for person in people %}
-    <li>{{ person.name }} {{ person.lastName }}</li>
-{% endfor %}
-</ul>
+{% block title %}Accueil - CodeXpress{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Bienvenue sur CodeXpress</h1>
+    <p>Ce projet démontre les fonctionnalités de base de Symfony.</p>
+    <a href="{{ path('app_tp') }}" class="btn btn-primary">Voir mon TP</a>
+</div>
+{% endblock %}

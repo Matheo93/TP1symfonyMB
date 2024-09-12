@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Person;
-use App\Form\PersonType;
-use App\Repository\PersonRepository;
+use App\Entity\User;
+use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,45 +15,45 @@ use Symfony\Component\Routing\Annotation\Route;
 class JohnController extends AbstractController
 {
     #[Route('/', name: 'app_john_index', methods: ['GET'])]
-    public function index(PersonRepository $personRepository): Response
+    public function index(UserRepository $userRepository): Response
     {
         return $this->render('john/index.html.twig', [
-            'people' => $personRepository->findAll(),
+            'users' => $userRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_john_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $person = new Person();
-        $form = $this->createForm(PersonType::class, $person);
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($person);
+            $entityManager->persist($user);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_john_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('john/new.html.twig', [
-            'person' => $person,
+            'user' => $user,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_john_show', methods: ['GET'])]
-    public function show(Person $person): Response
+    public function show(User $user): Response
     {
         return $this->render('john/show.html.twig', [
-            'person' => $person,
+            'user' => $user,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_john_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Person $person, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(PersonType::class, $person);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,16 +63,16 @@ class JohnController extends AbstractController
         }
 
         return $this->render('john/edit.html.twig', [
-            'person' => $person,
+            'user' => $user,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_john_delete', methods: ['POST'])]
-    public function delete(Request $request, Person $person, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$person->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($person);
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($user);
             $entityManager->flush();
         }
 

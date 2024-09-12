@@ -5,20 +5,18 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\PersonRepository;
+use App\Repository\UserRepository;
 
 class PreviewController extends AbstractController
 {
-    #[Route('/', name: 'home')]
-    public function index(PersonRepository $pr): Response
+    #[Route('/', name: 'app_home')]
+    public function index(UserRepository $userRepository): Response
     {
-        $name = 'Alex';
-        $people = $pr->findAll();
-        
+        $users = $userRepository->findAll();
+
         return $this->render('home/index.html.twig', [
-            'name' => $name,
-            'people' => $people,
+            'name' => 'World',
+            'people' => $users,
         ]);
     }
 }

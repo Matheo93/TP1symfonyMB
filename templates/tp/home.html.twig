@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - CodeXpress{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Bienvenue sur CodeXpress</h1>
+    <p>Ce projet démontre les fonctionnalités de base de Symfony, incluant :</p>
+    <ul>
+        <li>Création et gestion d'entités avec Doctrine</li>
+        <li>Utilisation de fixtures pour remplir la base de données</li>
+        <li>Création de contrôleurs et de routes</li>
+        <li>Utilisation de Twig pour le rendu des vues</li>
+    </ul>
+    <a href="{{ path('app_tp') }}" class="btn btn-primary">Voir le TP</a>
+</div>
+{% endblock %}
